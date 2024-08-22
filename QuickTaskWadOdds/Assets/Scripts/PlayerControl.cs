@@ -22,4 +22,11 @@ public class PlayerControl : MonoBehaviour
         playerRb.velocity = new Vector2(horizontalInput * speed, 0);
     }
 
+    private void Flip()
+    {
+
+    }
+     
+
+
 }
