@@ -6,11 +6,12 @@ public class PlayerControl : MonoBehaviour
 {
     private float horizontalInput;
     private float verticalInput;
+    private Rigidbody2D playerRb;
     private float speed = 10f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerRb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -18,6 +19,7 @@ public class PlayerControl : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
 
-        transform.Translate(Vector2.right * horizontalInput * speed * Time.deltaTime); 
+        playerRb.velocity = new Vector2(horizontalInput * speed, 0);
     }
+
 }
