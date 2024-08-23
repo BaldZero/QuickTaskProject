@@ -11,20 +11,24 @@ public class PlayerControl : MonoBehaviour
     public float jump = 10;
 
     private Rigidbody2D playerRb;
+    private BoxCollider2D playerCollider;
     
     private bool isFacingRight;
     private bool isOnGround;
+
+    
 
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        playerCollider = GetComponent<BoxCollider2D>();
         isFacingRight = true;
         isOnGround = true;
-}
+    }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         horizontalInput = Input.GetAxis("Horizontal");
 
@@ -33,6 +37,7 @@ public class PlayerControl : MonoBehaviour
         if(horizontalInput > 0 && !isFacingRight)
         {
             Flip();
+            
         }
 
         if (horizontalInput < 0 && isFacingRight)
@@ -40,12 +45,14 @@ public class PlayerControl : MonoBehaviour
             Flip(); 
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) )
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             playerRb.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
             isOnGround =false;  
         }
     }
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isOnGround = true; ;
